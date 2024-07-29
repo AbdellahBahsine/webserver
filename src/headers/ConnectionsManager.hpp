@@ -1,33 +1,33 @@
-#ifndef CONNECTIONSMANAGER_HPP
-#define CONNECTIONSMANAGER_HPP
+#pragma once
 
-#include"libs.hpp"
-#include"MyServer.hpp"
+#include "../../webserv.hpp"
 
+class ServerInstance;
 
 class ConnectionsManager {
     public:
         ConnectionsManager();
         ~ConnectionsManager();
         
-        void socketMonitore();
-        // void recvRequest();
-        void acceptNewIncommingConnections(MyServer *serverId);
-        int recvRequest(int clientFd,MyServer* serverId);
+        void socketMonitor();
+        void acceptNewIncommingConnections(ServerInstance *serverId);
+        // int receiveRequest(int clientFd,Server* serverId);
         void addFdToTheSet(int clientFd);
-        // void changeClinetMonitoringEvent(int clinetFd);
-        void addServerToTheSet(MyServer &serverInstance);
+        void changeClientMonitoringEvent(std::string event, int clientFd);
+        void addServerToTheSet(ServerInstance &serverInstance);
+        ServerInstance* getFdServer(int clientFd);
+        void deleteFromFdSet(int clientFd);
+        bool isTimeOut(time_t currentTime,  time_t time);
+        void checkClientTimeOut();
+        size_t getServerCount();
+        bool isaListeningSocket(int fd);
+
+        ServerInstance* isServerExist(ServerInstance &server);
+
+        void printMasterFdSet();
+        void printServers();
     private:
-        std::vector<MyServer> serversSet;
+        std::vector<ServerInstance> serversSet;
         std::vector<struct pollfd> masterFdSet;
-        int serverCount;
+        size_t serverCount;
 };
-
-
-
-
-
-
-
-
-#endif

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home page - webserv</title>
+
+		<link rel="stylesheet" href="styles.css" />
+		<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+	</head>
+	<body>
+		<div class="welcome__container">
+			<lottie-player class="welcome__image" src="./assets/images/anim_welcome.json" loop autoplay></lottie-player>
+			<h1 class="welcome__title">Welcome to<br />webserv</h1>
+		</div>
+
+		<a id="anchor" href="#about" class="scroll-to-about">
+			<div class="learn-more__container">
+				<lottie-player class="learn-more__image" src="./assets/images/anim_working.json" loop autoplay></lottie-player>
+				<div>
+					<h2 class="learn-more__title">Learn more about<br>the project</h2>
+					<p class="learn-more__subtitle">Scroll down or click here to discover<br>the project features</p>
+				</div>
+			</div>
+		</a>
+
+		<a id="navigationUploadBtn" class="to-upload">
+			<div class="upload-file__container">
+				<img src="assets/images/img_upload_2.png" alt="image-upload" class="upload-file__image" />
+				<div>
+					<h2 class="upload-file__title">Upload a<br />new file</h2>
+					<p class="upload-file__subtitle">Click here to choose a file to upload to our amazing server</p>
+				</div>
+			</div>
+		</a>
+
+		<a id="navigationLoginBtn" class="to-login">
+			<div class="login__container">
+				<img src="assets/images/img_login_2.png" alt="image-login" class="login__image" />
+				<div>
+					<h2 id="navigationLoginText" class="login__title">
+						Login to<br />
+						your account
+					</h2>
+					<p id="navigationLoginSubtitle" class="login__subtitle">
+						Click here to login to your useless account and do nothing
+					</p>
+				</div>
+			</div>
+		</a>
+
+		<div class="interactions__container">
+			<div class="team__container">
+				<h2 class="team__title">- Team -</h2>
+				<p class="team__subtitle">The team people behind this project</p>
+				<div class="images">
+					<div class="image">
+						<h1 class="names">Badr Eddine<br />El Kalai</h1>
+					</div>
+					<div class="image">
+						<h1 class="names">Abdellah<br />Bahsine</h1>
+					</div>
+					<div class="image">
+						<h1 class="names">Ilyasse<br />Salama</h1>
+					</div>
+				</div>
+			</div>
+
+			<div id="login" class="login_page__container">
+				<h2 id="loginpage__title" class="loginpage__title">Login</h2>
+				<p class="loginpage__subtitle">Use the cool account given by the team</p>
+				<form id="loginForm" class="login-form">
+					<input
+						id="username"
+						class="username"
+						type="text"
+						name="username"
+						placeholder="Username"
+						autocomplete="off" />
+					<input id="password" class="password" type="password" name="password" placeholder="Password" />
+					<button id="login-btn" role="button" class="login-btn" type="submit">Login</button>
+				</form>
+			</div>
+
+			<div id="upload" class="upload-files-container">
+					<form class="form-container" enctype='multipart/form-data'>
+					<div class="drag-file-area">
+						<span class="material-icons-outlined upload-icon">file_upload</span>
+						<h3 class="dynamic-message">Click browse below to select a file</h3>
+						<label for="file" class="browse-files-text">
+							browse file
+						</label>
+						<input type="file" id="file" class="default-file-input" name="file" />
+						<span>from device</span>
+					</div>
+					<span class="cannot-upload-message"> <span class="material-icons-outlined">error</span> Please select a file first <span class="material-icons-outlined cancel-alert-button">cancel</span> </span>
+					<button type="button" class="upload-button"> Upload </button>
+				</form>
+			</div>
+		
+		</div>
+
+		<div id="about" class="about__container">
+			<img src="assets/images/img_about_2.png" class="about__image">
+			<div class="about__content">
+				<h2 class="about__title">About the project</h2>
+				<p class="about__subtitle">
+					This project is here to make us write our own HTTP server. We were able to test it with a real browser. HTTP is one of the most used protocol on internet. Knowing its arcane will be useful, even if we won't be working on a website even though we did lmao.
+				</p>
+			</div>
+		</div>
+
+		<script src="main.js"></script>
+		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+	</body>
+</html>

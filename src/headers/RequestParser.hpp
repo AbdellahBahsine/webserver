@@ -1,0 +1,81 @@
+#pragma once
+
+#include "../../webserv.hpp"
+#include "ConfigurationFile.hpp"
+
+typedef struct ParsingState {
+    bool headerLineOK;
+    bool headersOK;
+    bool bodyOK;
+    bool ok;
+    int statusCode;
+    std::string statusMessage;
+} ParsingState;
+
+class RequestParser {
+    private:
+        ParsingState parsingState;
+        std::string requestResourcePath;
+        std::string requestData;
+        std::string body;
+        std::map<std::string, std::string> requestLine;
+        std::map<std::string, std::string> headers;
+        std::map<std::string, std::string> params;
+		t_server *server;
+        t_route *route;
+		size_t chunkRemainder;
+
+		std::string boundary;
+		std::string fileName;
+		std::string sizeBuffer;
+		std::string previousChunkCRLF;
+
+		bool isCRLF;
+		bool isRequestChunked;
+		bool isRequestMultipart;
+		bool isFirstRequest;
+    public:
+        RequestParser();
+
+        void mergeRequestChunks(std::string &receivedData);
+        void nullOutVars();
+        void logParsedRequest();
+
+        void parseRequestLine(std::string &requestData);
+        void parseRequestHeaders(std::string &requestData);
+        void parseRequestParams(std::string &requestData);
+        void parseRequestBody(std::string &requestData);
+        void verifyIfRequestIsSafe();
+
+        void setParsingState(bool isOK);
+		void setServerInformation(t_server *server);
+        void setStatusCode(int statusCode);
+
+        t_route *getRoute();
+        t_server *getServerInformation();
+        std::map<std::string, std::string> &getRequestLine();
+        std::string getRequestedResourcePath();
+        std::map<std::string, std::string> &getHeaders();
+        const std::map<std::string, std::string> &getParams();
+        const std::string &getBody();
+        const ParsingState &getParsingState();
+        std::string &getRequestData();
+        std::string &getFileName();
+        bool getIsRequestChunked();
+        bool getIsRequestMultipart();
+
+        bool isPathAccessible();
+        bool isMethodAllowed();
+        bool isHeaderLineValid();
+        bool isRedirection();
+
+		void getChunkedData(std::string &body);
+		void getBoundary(std::string contentType);
+		void getBoundaryContent(std::string &body);
+		bool parseContentType();
+		std::string getContentDisposition(std::map<std::string, std::string> &headers);
+		size_t getChunkSize(std::string &body);
+		void escapeCRLF(std::string &body);
+		void openFile(std::fstream &myFile);
+        std::string getBoundaryInfos(int a);
+};
